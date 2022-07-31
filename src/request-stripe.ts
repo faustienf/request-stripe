@@ -1,44 +1,62 @@
 import styles from './request-stripe.css';
 
+export type Render = (onComplete: (error: Error | null) => void) => () => void;
+
 const random = () => Math.random().toString(32).slice(2);
 const generateToken = () => random() + random();
 const requests = new Set<string>();
 
-export const defaultRender = (() => {
-  let finish: null | (() => void) = null;
+export const defaultRender: Render = (onComplete) => {
+  const stripeElement = document.createElement('div');
+  stripeElement.classList.add('RequestStripe');
+  stripeElement.classList.add(styles['request-stripe']);
+  stripeElement.dataset.state = 'process';
+
+  stripeElement.addEventListener('animationend', () => {
+    document.body.removeChild(stripeElement);
+
+    const error =
+      stripeElement.dataset.state !== 'finish'
+        ? new Error("Request hasn't been finished correctly")
+        : null;
+
+    onComplete(error);
+  });
+
+  document.body.appendChild(stripeElement);
 
   return () => {
-    if (finish) {
-      return finish;
+    // finish animation and trigger animationend Event
+    stripeElement.dataset.state = 'finish';
+  };
+};
+
+const startProcess = (() => {
+  let endProcess: null | (() => void) = null;
+
+  return (render: Render) => {
+    if (endProcess) {
+      return endProcess;
     }
 
-    const stripeElement = document.createElement('div');
-    stripeElement.classList.add('RequestStripe');
-    stripeElement.classList.add(styles['request-stripe']);
-    stripeElement.dataset.state = 'process';
-
-    finish = () => {
-      stripeElement.dataset.state = 'finish';
-      finish = null;
-    };
-
-    stripeElement.addEventListener('animationend', () => {
-      document.body.removeChild(stripeElement);
-
-      if (stripeElement.dataset.state !== 'finish') {
-        finish = null;
-        throw new Error("Request hasn't been finished correctly");
+    const finish = render((error) => {
+      if (error) {
+        endProcess = null;
+        throw error;
       }
     });
 
-    document.body.appendChild(stripeElement);
+    endProcess = () => {
+      finish();
+      endProcess = null;
+    };
 
-    return finish;
+    return endProcess;
   };
 })();
 
 type Options = {
-  render: () => () => void;
+  render: Render;
 };
 
 export const requestStripe = (options: Partial<Options> = {}) => {
@@ -47,12 +65,12 @@ export const requestStripe = (options: Partial<Options> = {}) => {
   const requestId = generateToken();
   requests.add(requestId);
 
-  const finish = render();
+  const endProcess = startProcess(render);
 
   return () => {
     requests.delete(requestId);
     if (!requests.size) {
-      finish();
+      endProcess();
     }
   };
 };
