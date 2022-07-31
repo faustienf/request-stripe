@@ -1,23 +1,12 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import './style.css';
+import { requestStripe } from 'request-stripe';
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+  <button id="run" type="button">Click me</button>
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+document
+  .querySelector<HTMLButtonElement>('#run')!
+  .addEventListener('click', () => {
+    setTimeout(requestStripe(), 1000);
+  });

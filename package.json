@@ -1,0 +1,46 @@
+{
+  "name": "request-stripe",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./request-stripe": {
+      "require": "./dist/request-stripe.js",
+      "import": "./dist/request-stripe.mjs",
+      "default": "./dist/request-stripe.mjs"
+    }
+  },
+  "scripts": {
+    "clean": "rm -r dist",
+    "build": "npm run check-types && npm run clean && rollup -c",
+    "check-types": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faustienf/request-stripe.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/faustienf/request-stripe/issues"
+  },
+  "homepage": "https://github.com/faustienf/request-stripe#readme",
+  "prettier": {
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "rollup": "^2.77.2",
+    "rollup-plugin-esbuild": "^4.9.1",
+    "rollup-plugin-styles": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.32.1"
+  }
+}

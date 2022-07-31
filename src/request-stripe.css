@@ -1,0 +1,59 @@
+.request-stripe {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 0 3px 3px 0;
+  opacity: 1;
+  cursor: wait;
+  background-color: #e11d48;
+  animation-name: process, finish;
+  animation-duration: 60s, 0.3s;
+  animation-play-state: paused, paused;
+  animation-timing-function: cubic-bezier(0, 1, 0, 1), linear;
+  animation-fill-mode: forwards, forwards;
+}
+
+.request-stripe::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  border-radius: 3px;
+  background-image: linear-gradient(to right, transparent, #f43f5e);
+  box-shadow: 0 -4px 10px 2px #e11d48;
+}
+
+.request-stripe[data-state='process'] {
+  animation-play-state: running, paused;
+}
+
+.request-stripe[data-state='finish'] {
+  animation-play-state: paused, running;
+}
+
+@keyframes process {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-2%, 0, 0);
+  }
+}
+
+@keyframes finish {
+  33% {
+    transform: translate3d(0, 0, 0);
+  }
+  67% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
