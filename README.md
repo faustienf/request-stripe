@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/faustienf/request-stripe/main/aseets/header.png" width="100%">
+  <img src="https://raw.githubusercontent.com/faustienf/request-stripe/main/assets/header.png" width="80%">
 </p>
 
 # request-stripe
