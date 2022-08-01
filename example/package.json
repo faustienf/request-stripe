@@ -11,6 +11,6 @@
     "vite": "^3.0.0"
   },
   "dependencies": {
-    "request-stripe": "file:.."
+    "request-stripe": "*"
   }
 }
