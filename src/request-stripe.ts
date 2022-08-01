@@ -15,7 +15,6 @@ export const defaultRender: Render = (onComplete) => {
 
   stripeElement.addEventListener('animationend', () => {
     onComplete();
-
     document.body.removeChild(stripeElement);
 
     if (stripeElement.dataset.state !== 'finish') {
@@ -46,13 +45,7 @@ const startProcess = (render: Render) => {
   return finish;
 };
 
-type Options = {
-  render: Render;
-};
-
-export const requestStripe = (options: Partial<Options> = {}) => {
-  const { render = defaultRender } = options;
-
+export const requestStripe = (render: Render = defaultRender) => {
   const requestId = generateToken();
   requests.add(requestId);
 
