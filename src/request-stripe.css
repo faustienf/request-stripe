@@ -7,7 +7,8 @@
   height: 3px;
   border-radius: 0 3px 3px 0;
   cursor: wait;
-  background-color: #e11d48;
+  color: #3b82f6;
+  background-color: currentColor;
   animation-name: process, finish;
   animation-duration: 60s, 0.3s;
   animation-play-state: paused, paused;
@@ -23,8 +24,12 @@
   height: 100%;
   width: 2%;
   border-radius: 3px;
-  background-image: linear-gradient(to right, transparent, #f43f5e);
-  box-shadow: 0 -4px 10px 2px #e11d48;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.5)
+  );
+  box-shadow: 0 -4px 8px 2px currentColor;
 }
 
 .request-stripe[data-state='process'] {
