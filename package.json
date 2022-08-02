@@ -21,14 +21,15 @@
   },
   "scripts": {
     "clean": "rm -r dist",
-    "build": "npm run check-types && npm run clean && rollup -c",
-    "check-types": "tsc"
+    "build": "npm run clean && rollup -c",
+    "check-types": "tsc",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/faustienf/request-stripe.git"
   },
-  "author": "",
+  "author": "@faustien",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/faustienf/request-stripe/issues"
@@ -41,6 +42,7 @@
     "rollup": "^2.77.2",
     "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-styles": "^4.0.0",
-    "rollup-plugin-typescript2": "^0.32.1"
+    "rollup-plugin-typescript2": "^0.32.1",
+    "vitest": "^0.20.2"
   }
 }

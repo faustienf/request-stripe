@@ -3,9 +3,9 @@ import styles from './request-stripe.css';
 export type Render = (onComplete: () => void) => () => void;
 
 const random = () => Math.random().toString(32).slice(2);
-const generateToken = () => random() + random();
+const makeId = () => random() + random();
 const requests = new Set<string>();
-const processes = new Set<ReturnType<Render>>();
+const surrenders = new Set<ReturnType<Render>>();
 
 export const defaultRender: Render = (onComplete) => {
   const stripeElement = document.createElement('div');
@@ -31,30 +31,23 @@ export const defaultRender: Render = (onComplete) => {
   };
 };
 
-const startProcess = (render: Render) => {
-  const endProcess = [...processes].at(-1);
-  if (endProcess) {
-    return endProcess;
-  }
-
-  const finish = render(() => {
-    processes.delete(finish);
-  });
-  processes.add(finish);
-
-  return finish;
-};
-
 export const requestStripe = (render: Render = defaultRender) => {
-  const requestId = generateToken();
+  const requestId = makeId();
   requests.add(requestId);
 
-  const endProcess = startProcess(render);
+  if (!surrenders.size) {
+    const surrender = render(() => {
+      requests.delete(requestId);
+      surrenders.delete(surrender);
+    });
+    surrenders.add(surrender);
+  }
 
   return () => {
     requests.delete(requestId);
-    if (!requests.size) {
-      endProcess();
+    const surrender = [...surrenders].at(-1);
+    if (!requests.size && surrender) {
+      surrender();
     }
   };
 };
