@@ -2,14 +2,14 @@
   <img src="https://raw.githubusercontent.com/faustienf/request-stripe/main/assets/header.png" width="80%">
 </p>
 
-# request-stripe
+# 🌈 request-stripe
 
-❗️library hasn't been published yet.
+❗️❗️❗️library hasn't been published yet.
 
 ## Features
 
 - 📦 Zero dependencies
-- 🕯 Framework agnostic, using vanila api
+- 🕯 Framework agnostic, using vanila API
 - 🔨 Tiny API
 - ⚙️ Customize render and styles
 - 🧲 Autocombine requests
