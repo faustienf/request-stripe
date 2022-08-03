@@ -2,9 +2,11 @@
   <img src="https://raw.githubusercontent.com/faustienf/request-stripe/main/assets/header.png" width="80%">
 </p>
 
-# 🌈 request-stripe
+[![npm-version](https://img.shields.io/npm/v/request-stripe.svg)](https://npmjs.org/package/request-stripe)
 
-❗️❗️❗️library hasn't been published yet.
+# request-stripe 🌈
+
+The tiny library for rendering a progress bar on top your screen.
 
 ## Features
 
