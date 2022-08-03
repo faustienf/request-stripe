@@ -1,7 +1,7 @@
 {
   "name": "request-stripe",
   "version": "1.0.0",
-  "description": "",
+  "description": "🌈 The tiny library for rendering a progress bar on top your screen",
   "type": "module",
   "source": "src/index.ts",
   "main": "dist/index.js",
