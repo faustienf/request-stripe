@@ -4,9 +4,9 @@
 
 [![npm-version](https://img.shields.io/npm/v/request-stripe.svg)](https://npmjs.org/package/request-stripe)
 
-# request-stripe 🌈
+# request-stripe
 
-The tiny library for rendering a progress bar on top your screen.
+🌈 The tiny library for rendering a progress bar on top your screen.
 
 ## Features
 
@@ -25,8 +25,12 @@ npm install request-stripe
 ```js
 import { requestStripe } from 'request-stripe';
 
+fetch().finally(requestStripe());
+// or
 const done = requestStripe();
-fetch().finally(done);
+fetch().finally(() => {
+  done();
+});
 ```
 
 ## Customization
@@ -63,17 +67,11 @@ fetch().finally(done);
 import { Render, requestStripe } from 'request-stripe';
 
 // Write a render function
-const customRender: Render = (onComplete) => {
+const customRender: Render = () => {
   const customElement = document.createElement('div');
   document.body.appendChild(customElement);
 
-  setTimeout(() => {
-    onComplete();
-    throw new Error('Timeout Exception');
-  }, 9999);
-
   return () => {
-    onComplete();
     document.body.removeChild(stripeElement);
   };
 };

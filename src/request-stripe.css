@@ -4,16 +4,15 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  border-radius: 0 3px 3px 0;
+  font-size: 2px;
+  height: 1em;
+  border-radius: 0 0.5em 0.5em 0;
   cursor: wait;
-  color: #3b82f6;
+  color: #db2777;
   background-color: currentColor;
-  animation-name: process, finish;
-  animation-duration: 60s, 0.3s;
-  animation-play-state: paused, paused;
-  animation-timing-function: cubic-bezier(0, 1, 0, 1), linear;
-  animation-fill-mode: forwards, forwards;
+  box-shadow: 0px 0px 2px currentColor;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
 }
 
 .request-stripe::after {
@@ -22,41 +21,20 @@
   right: 0;
   top: 0;
   height: 100%;
-  width: 2%;
-  border-radius: 3px;
-  background-image: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.5)
-  );
-  box-shadow: 0 -4px 8px 2px currentColor;
+  width: 10%;
+  border-radius: 0.5em;
+  box-shadow: 2px -1px 10px 1px currentColor;
+  transform: rotate(3deg);
+  transform-origin: right;
 }
 
 .request-stripe[data-state='process'] {
-  animation-play-state: running, paused;
+  transition: transform 60s cubic-bezier(0, 1, 0, 1);
+  transform: translate3d(-2%, 0, 0);
 }
 
 .request-stripe[data-state='finish'] {
-  animation-play-state: paused, running;
-}
-
-@keyframes process {
-  0% {
-    transform: translate3d(-100%, 0, 0);
-  }
-  100% {
-    transform: translate3d(-2%, 0, 0);
-  }
-}
-
-@keyframes finish {
-  33% {
-    transform: translate3d(0, 0, 0);
-  }
-  67% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, -100%, 0);
-  }
+  transition: transform 0.1s linear, opacity 0.2s ease-out 0.1s;
+  transform: translate3d(0, 0, 0);
+  opacity: 0;
 }

@@ -32,7 +32,8 @@
     "clean": "rm -r dist",
     "build": "npm run clean && rollup -c",
     "check-types": "tsc",
-    "test": "vitest run"
+    "test": "vitest run",
+    "release": "npm run check-types && npm run test && npm run build && npm publish"
   },
   "repository": {
     "type": "git",
