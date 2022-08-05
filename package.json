@@ -34,8 +34,8 @@
     "build": "npm run clean && rollup -c",
     "check-types": "tsc",
     "test": "vitest run",
-    "check-all": "npm run check-types && npm run test && npm run size",
-    "release": "npm run build && npm run check-all && npm publish"
+    "check-all": "npm run build && npm run check-types && npm run test && npm run size",
+    "release": "npm run check-all && npm publish"
   },
   "repository": {
     "type": "git",
