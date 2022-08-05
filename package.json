@@ -29,11 +29,13 @@
     }
   },
   "scripts": {
+    "size": "size-limit",
     "clean": "rm -r dist",
     "build": "npm run clean && rollup -c",
     "check-types": "tsc",
     "test": "vitest run",
-    "release": "npm run check-types && npm run test && npm run build && npm publish"
+    "check-all": "npm run check-types && npm run test && npm run size",
+    "release": "npm run build && npm run check-all && npm publish"
   },
   "repository": {
     "type": "git",
@@ -48,11 +50,23 @@
   "prettier": {
     "singleQuote": true
   },
+  "size-limit": [
+    {
+      "limit": "3 kB",
+      "path": "dist/*.mjs"
+    },
+    {
+      "limit": "3 kB",
+      "path": "dist/*.js"
+    }
+  ],
   "devDependencies": {
+    "@size-limit/file": "^8.0.0",
     "rollup": "^2.77.2",
     "rollup-plugin-esbuild": "^4.9.1",
     "rollup-plugin-styles": "^4.0.0",
     "rollup-plugin-typescript2": "^0.32.1",
+    "size-limit": "^8.0.0",
     "vitest": "^0.20.2"
   }
 }

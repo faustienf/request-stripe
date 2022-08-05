@@ -12,6 +12,7 @@
 
 - 📦 Zero dependencies
 - 🕯 Framework agnostic, using vanila API
+- 🗜 Less [3 KB](https://bundlephobia.com/package/request-stripe)
 - 🔨 Tiny API
 - ⚙️ Customize render and styles
 - 🧲 Autocombine requests
@@ -78,4 +79,5 @@ const customRender: Render = () => {
 
 // Pass the function
 const done = requestStripe(customRender);
+fetch().finally(done);
 ```
