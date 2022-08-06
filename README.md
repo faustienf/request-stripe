@@ -36,7 +36,7 @@ fetch().finally(() => {
 
 ## Customization
 
-### Styles
+### Styles via `.request-stripe-custom`
 
 ```css
 .request-stripe-custom {
